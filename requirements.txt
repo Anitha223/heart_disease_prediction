@@ -3,7 +3,6 @@ pandas
 numpy
 scikit-learn
 joblib
-tensorflow
 gunicorn
 whitenoise
 django-cors-headers  
