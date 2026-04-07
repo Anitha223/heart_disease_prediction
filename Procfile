@@ -1,0 +1,1 @@
+web: gunicorn heart_disease_prediction_using_hybrid_ML.wsgi

@@ -178,10 +178,71 @@ def api_predict_heart_disease(request):
             return JsonResponse({"success": False, "error": str(e)}, status=400)
             
     return JsonResponse({"success": False, "error": "Only POST requests are allowed"}, status=405)
+
+@csrf_exempt
+def api_login(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            loginid = data.get("loginid", "")
+            password = data.get("password", "")
+            user = UserRegisteredTable.objects.get(loginid=loginid, password=password)
+            if user.status == 'activated':
+                return JsonResponse({
+                    "success": True,
+                    "name": user.name,
+                    "email": user.email,
+                    "message": "Login successful!"
+                })
+            else:
+                return JsonResponse({"success": False, "error": "Account not activated yet. Please wait for admin approval."}, status=403)
+        except UserRegisteredTable.DoesNotExist:
+            return JsonResponse({"success": False, "error": "Invalid Login ID or Password"}, status=401)
+        except Exception as e:
+            return JsonResponse({"success": False, "error": str(e)}, status=400)
+    return JsonResponse({"success": False, "error": "Only POST requests are allowed"}, status=405)
+
+@csrf_exempt
+def api_register(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            user = UserRegisteredTable(
+                name=data.get("name", ""),
+                loginid=data.get("loginid", ""),
+                email=data.get("email", ""),
+                password=data.get("password", ""),
+                mobile=data.get("mobile", ""),
+                locality=data.get("locality", ""),
+                state=data.get("state", ""),
+                status="activated",
+            )
+            user.full_clean()
+            user.save()
+            return JsonResponse({"success": True, "message": "Registration successful! Please wait for admin activation."})
+        except Exception as e:
+            return JsonResponse({"success": False, "error": str(e)}, status=400)
+    return JsonResponse({"success": False, "error": "Only POST requests are allowed"}, status=405)
+
 def classificationView(request):
     svm_acc, dt_acc, ann_acc,hmm_acc,best_model_name=main()
     return render(request,'users/classificationView.html',context={'svm_acc':svm_acc,'dt_ac':dt_acc,'ann_ac':ann_acc,'hmm_ac':hmm_acc,'best_model':best_model_name})
 
+@csrf_exempt
+def api_classification(request):
+    try:
+        svm_acc, dt_acc, ann_acc, hmm_acc, best_model_name = main()
+        return JsonResponse({
+            "success": True,
+            "svm_acc": svm_acc,
+            "dt_ac": dt_acc,
+            "ann_ac": ann_acc,
+            "hmm_ac": hmm_acc,
+            "best_model": best_model_name
+        })
+    except Exception as e:
+        return JsonResponse({"success": False, "error": str(e)}, status=400)
+        
 
 import pandas as pd
 from django.shortcuts import render

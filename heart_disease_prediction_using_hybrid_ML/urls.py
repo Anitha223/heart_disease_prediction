@@ -47,6 +47,9 @@ urlpatterns = [
     
     # --- API ENDPOINTS FOR MOBILE APP ---
     path('api/predict', uv.api_predict_heart_disease, name='api_predict'),
+    path('api/login', uv.api_login, name='api_login'),
+    path('api/register', uv.api_register, name='api_register'),
+    path('api/classification', uv.api_classification, name='api_classification'),
 
 
     
