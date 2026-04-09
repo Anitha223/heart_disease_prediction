@@ -13,7 +13,7 @@ def main():
 
 
     # Load dataset
-    df = pd.read_csv(r"media\heart-disease-dataset.csv")
+    df = pd.read_csv("media/heart-disease-dataset.csv")
 
     # Handle missing values
     df.dropna(inplace=True)

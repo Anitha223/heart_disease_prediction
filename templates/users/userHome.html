@@ -164,16 +164,16 @@
                     <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="userHome">Home</a>
+                                <a class="nav-link" href="{% url 'userHome' %}">Home</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="dataset">Dataset_views</a>
+                                <a class="nav-link" href="{% url 'dataset' %}">Dataset_views</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="predict_heart_disease">Prediction</a>
+                                <a class="nav-link" href="{% url 'predict_heart_disease' %}">Prediction</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="classificationView">Classification View</a>
+                                <a class="nav-link" href="{% url 'classificationView' %}">Classification View</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/">Logout</a>
