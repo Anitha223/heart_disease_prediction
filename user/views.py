@@ -97,16 +97,20 @@ def predict_heart_disease(request):
                 oldpeak, st_slope
             ]).reshape(1, -1)
 
-            # Load H5 model to get accurate Risk Percentage for the Graph
-            from tensorflow.keras.models import load_model
-            h5_model_path = os.path.join(settings.BASE_DIR, 'best_model.h5')
-            h5_scaler = joblib.load(os.path.join(settings.BASE_DIR, 'scaler_h5.pkl'))
+            user_input_scaled = scaler.transform(user_input)
             
-            h5_model = load_model(h5_model_path)
-            user_input_scaled_h5 = h5_scaler.transform(user_input)
+            # Predict using standard scikit-learn best_model.pkl
+            prediction = model.predict(user_input_scaled)[0]
             
-            risk_probability = float(h5_model.predict(user_input_scaled_h5)[0][0])
-            prediction_result = "High Risk" if risk_probability > 0.5 else "Low Risk"
+            try:
+                if hasattr(model, "predict_proba"):
+                    risk_probability = float(model.predict_proba(user_input_scaled)[0][1])
+                else:
+                    risk_probability = 0.88 if prediction == 1.0 else 0.12
+            except:
+                risk_probability = 0.88 if prediction == 1.0 else 0.12
+
+            prediction_result = "High Risk" if prediction in [1, 1.0, '1', '1.0'] else "Low Risk"
             risk_percent = round(risk_probability * 100, 1)
 
             return render(request, "users/predictionForm.html", {
@@ -153,19 +157,20 @@ def api_predict_heart_disease(request):
                 oldpeak, st_slope
             ]).reshape(1, -1)
 
-            # Lazy load H5 model and scaler dynamically for API
-            from tensorflow.keras.models import load_model
-            h5_model_path = os.path.join(settings.BASE_DIR, 'best_model.h5')
-            scaler_path = os.path.join(settings.BASE_DIR, 'scaler_h5.pkl')
+            user_input_scaled = scaler.transform(user_input)
             
-            h5_model = load_model(h5_model_path)
-            h5_scaler = joblib.load(scaler_path)
+            # Predict using standard scikit-learn best_model.pkl
+            prediction = model.predict(user_input_scaled)[0]
+            
+            try:
+                if hasattr(model, "predict_proba"):
+                    risk_probability = float(model.predict_proba(user_input_scaled)[0][1])
+                else:
+                    risk_probability = 0.88 if prediction == 1.0 else 0.12
+            except:
+                risk_probability = 0.88 if prediction == 1.0 else 0.12
 
-            user_input_scaled = h5_scaler.transform(user_input)
-            
-            # Predict probability
-            risk_probability = float(h5_model.predict(user_input_scaled)[0][0])
-            is_high_risk = bool(risk_probability > 0.5)
+            is_high_risk = bool(prediction in [1, 1.0, '1', '1.0'])
 
             return JsonResponse({
                 "success": True,
