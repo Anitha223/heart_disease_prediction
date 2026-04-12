@@ -230,19 +230,27 @@ def api_register(request):
     return JsonResponse({"success": False, "error": "Only POST requests are allowed"}, status=405)
 
 def classificationView(request):
-    svm_acc, dt_acc, ann_acc,hmm_acc,best_model_name=main()
-    return render(request,'users/classificationView.html',context={'svm_acc':svm_acc,'dt_ac':dt_acc,'ann_ac':ann_acc,'hmm_ac':hmm_acc,'best_model':best_model_name})
+    svm_acc, dt_acc, ann_acc, hmm_acc, hybrid_acc, best_model_name = main()
+    return render(request, 'users/classificationView.html', context={
+        'svm_acc': round(svm_acc * 100, 2),
+        'dt_ac': round(dt_acc * 100, 2),
+        'ann_ac': round(ann_acc * 100, 2),
+        'hmm_ac': round(hmm_acc * 100, 2),
+        'hybrid_acc': round(hybrid_acc * 100, 2),
+        'best_model': best_model_name
+    })
 
 @csrf_exempt
 def api_classification(request):
     try:
-        svm_acc, dt_acc, ann_acc, hmm_acc, best_model_name = main()
+        svm_acc, dt_acc, ann_acc, hmm_acc, hybrid_acc, best_model_name = main()
         return JsonResponse({
             "success": True,
-            "svm_acc": svm_acc,
-            "dt_ac": dt_acc,
-            "ann_ac": ann_acc,
-            "hmm_ac": hmm_acc,
+            "svm_acc": round(svm_acc * 100, 2),
+            "dt_ac": round(dt_acc * 100, 2),
+            "ann_ac": round(ann_acc * 100, 2),
+            "hmm_ac": round(hmm_acc * 100, 2),
+            "hybrid_acc": round(hybrid_acc * 100, 2),
             "best_model": best_model_name
         })
     except Exception as e:

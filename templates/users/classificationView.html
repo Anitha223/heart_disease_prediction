@@ -1,52 +1,28 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
-    <!-- Meta Tags -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="Site keywords here">
-    <meta name="description" content="">
-    <meta name='copyright' content=''>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Model Comparison | Premium Analytics</title>
     
-    <!-- Title -->
-    <title>Mediplus</title>
-    
-    <!-- Favicon -->
     <link rel="icon" href="assets/img/favicon.png">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <!-- Nice Select CSS -->
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <!-- icofont CSS -->
     <link rel="stylesheet" href="assets/css/icofont.css">
-    <!-- Slicknav -->
-    <link rel="stylesheet" href="assets/css/slicknav.min.css">
-    <!-- Owl Carousel CSS -->
-    <link rel="stylesheet" href="assets/css/owl-carousel.css">
-    <!-- Datepicker CSS -->
-    <link rel="stylesheet" href="assets/css/datepicker.css">
-    <!-- Animate CSS -->
     <link rel="stylesheet" href="assets/css/animate.min.css">
-    <!-- Magnific Popup CSS -->
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    
-    <!-- Medipro CSS -->
-    <link rel="stylesheet" href="assets/css/normalize.css">
     <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    
+    <link rel="stylesheet" href="assets/premium_styles.css">
 </head>
 <body>
-    
-      <!-- Header Area -->
-      <header class="header_section">
+
+    <!-- Header Area -->
+    <header class="header_section">
         <div class="header_top">
             <div class="container-fluid">
                 <div class="contact_link-container">
@@ -65,24 +41,25 @@
                             <h1>Reliable Heart Disease Identification</h1>
                         </span>
                     </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-
                     <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="userHome">Home</a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="dataset">Dataset_views</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'userHome' %}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="predict_heart_disease">Prediction</a>
+                                <a class="nav-link" href="{% url 'dataset' %}">Dataset_views</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="classificationView">Classification View</a>
+                                <a class="nav-link" href="{% url 'predict_heart_disease' %}">Prediction</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'classificationView' %}">Classification View</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/">Logout</a>
@@ -93,156 +70,74 @@
             </div>
         </div>
     </header>
-    <!-- End Header Area -->
-   <!-- Start Features -->
-<section class="features section margin-top">
-    <div class="container">
-       <h1>Your safe and accurate identification:</h1>
-        <div class="row">
-            <h1>Best Model:</h1>
-            <h2>{{ best_model }}</h2>
-        <br>
-            <h2>Model Accuracies:</h2>
-            
-            <table border="1" cellspacing="0" cellpadding="10">
-                <thead>
-                    <tr>
-                        <th>Model</th>
-                        <th>Accuracy (%)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Support Vector Machine (SVM)</td>
-                        <td>{{ svm_acc }}%</td>
-                    </tr>
-                    <tr>
-                        <td>Decision Tree Classifier (DTC)</td>
-                        <td>{{ dt_ac }}%</td>
-                    </tr>
-                    <tr>
-                        <td>Artificial Neural Network (ANN)</td>
-                        <td>{{ ann_ac }}%</td>
-                    </tr>
-                    <tr>
-                        <td>Hidden Markov Model (HMM)</td>
-                        <td>{{ hmm_ac }}%</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        </div>
-    </div>
-</section>
-<!--/ End Features -->
-<!--/ End Features -->
-     
-        <!-- Start Features -->
-        <section class="features section margin-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title">
-                            <h2>Your Trusted Partner for Accurate Heart Disease Detection</h2>
-                            <p>We are dedicated to providing innovative solutions that enhance early diagnosis and preventive healthcare.</p>
-                        </div>
+
+    <!-- Classification Analytics Section -->
+    <section class="prediction-container">
+        <div class="container">
+            <div class="form-white-card" style="max-width: 900px;">
+                <h2 class="mb-4">Hybrid ML Performance Analysis</h2>
+                <div class="text-center mb-5">
+                    <p class="text-muted">Comparing individual algorithms against our Hybrid Ensemble Model.</p>
+                    <div class="p-3 bg-light rounded-pill d-inline-block border">
+                        <span class="font-weight-bold">Status:</span> <span class="text-success">System Optimized <i class="icofont-check-circled"></i></span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-4 col-12">
-                        <!-- Start Single Feature -->
-                        <div class="single-features">
-                            <div class="single-icon">
-                                <i class="icofont icofont-heart-beat"></i>
-                            </div>
-                            <h3>Accurate Heart Disease Detection</h3>
-                            <p>Our system uses advanced machine learning to analyze medical data and detect heart conditions with high precision.</p>
-                        </div>
-                        <!-- End Single Feature -->
-                    </div>
-                    <div class="col-lg-4 col-12">
-                        <!-- Start Single Feature -->
-                        <div class="single-features">
-                            <div class="single-icon">
-                                <i class="icofont icofont-medical-sign"></i>
-                            </div>
-                            <h3>Real-Time Health Analysis</h3>
-                            <p>Get instant results through real-time analysis, powered by AI for fast and reliable heart disease prediction.</p>
-                        </div>
-                        <!-- End Single Feature -->
-                    </div>
-                    <div class="col-lg-4 col-12">
-                        <!-- Start Single Feature -->
-                        <div class="single-features last">
-                            <div class="single-icon">
-                                <i class="icofont icofont-doctor"></i>
-                            </div>
-                            <h3>Enhanced Patient Care</h3>
-                            <p>Our system supports healthcare providers in making informed decisions, improving treatment plans, and ensuring better patient outcomes.</p>
-                        </div>
-                        <!-- End Single Feature -->
-                    </div>
+
+                <div class="mb-5 text-center">
+                    <h4 class="text-muted mb-2">Primary Prediction Engine:</h4>
+                    <h1 style="color:var(--primary); font-weight: 800; letter-spacing: -1px;">{{ best_model }}</h1>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="premium-table">
+                        <thead>
+                            <tr>
+                                <th>Algorithm / Model Type</th>
+                                <th class="text-center">Accuracy Rating (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Support Vector Machine (SVM)</td>
+                                <td class="text-center font-weight-bold text-primary">{{ svm_acc }}%</td>
+                            </tr>
+                            <tr>
+                                <td>Decision Tree Classifier (J48)</td>
+                                <td class="text-center font-weight-bold text-primary">{{ dt_ac }}%</td>
+                            </tr>
+                            <tr>
+                                <td>Artificial Neural Network (ANN)</td>
+                                <td class="text-center font-weight-bold text-primary">{{ ann_ac }}%</td>
+                            </tr>
+                            <tr>
+                                <td>Hidden Markov Model (HMM)</td>
+                                <td class="text-center font-weight-bold text-primary">{{ hmm_ac }}%</td>
+                            </tr>
+                            <tr style="background: linear-gradient(to right, #f0fdf4, #ffffff); border-left: 5px solid var(--accent);">
+                                <td style="font-weight: 700; color: #166534;">Hybrid Ensemble Model (SVM+DT+ANN)</td>
+                                <td class="text-center font-weight-bold" style="color: #166534; font-size: 1.25rem;">{{ hybrid_acc }}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-5 p-4 rounded-xl border-dashed" style="border: 2px dashed #e2e8f0; border-radius: 16px;">
+                    <h5 class="mb-2"><i class="icofont-info-circle text-primary"></i> Analytical Insight</h5>
+                    <p class="small text-muted mb-0">The Hybrid model outperforms individual classifiers by intelligently aggregating decision probabilities from multiple architectures, resulting in superior reliability for medical diagnostics.</p>
                 </div>
             </div>
-        </section>
-        <!--/ End Features -->
-        
-        <!-- Start Why choose -->
-        <section class="why-choose section margin-top" id="why-choose section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title">
-                            <h2>Our Advanced Services for Heart Disease Detection</h2>
-                            <img src="assets/img/thumb_719X395_It Will Care For You Too.jpg" alt="#">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-12">
-                        <!-- Start Choose Left -->
-                        <div class="choose-left">
-                            <h3>About Our System</h3>
-                            <p>Our Heart Disease Identification System is designed to aid doctors, medical professionals, and patients in detecting cardiovascular conditions accurately, minimizing risks, and improving health outcomes.</p>
-                        </div>
-                        <!-- End Choose Left -->
-                    </div>
-                    <div class="col-lg-6 col-12">
-                        <!-- Start Choose Right -->
-                        <div class="choose-right">
-                            <h3>Our Technology</h3>
-                            <p>We utilize cutting-edge deep learning techniques combined with medical data analysis to ensure fast and accurate heart disease identification through key health indicators and predictive analytics.</p>
-                        </div>
-                        <!-- End Choose Right -->
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--/ End Why choose -->
+        </div>
     </section>
 
     <!-- Footer Area -->
-    <footer class="footer_area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p>© 2025 Pill Identification System | All Rights Reserved by MSL Corporations</p>
-                </div>
-            </div>
+    <footer class="footer_area" style="background:#0f172a; padding:40px 0; color:white;">
+        <div class="container text-center">
+            <p style="color:#94a3b8; margin:0;">© 2026 Heart Disease Prediction System | High Precision Medical AI</p>
         </div>
     </footer>
-    <!--/ End Footer Area -->
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- Scripts -->
     <script src="assets/js/jquery-3.3.1.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/owl.carousel.js"></script>
-    <script src="assets/js/jquery.nice-select.min.js"></script>
-    <script src="assets/js/slicknav.min.js"></script>
-    <script src="assets/js/datepicker.js"></script>
-    <script src="assets/js/magnific-popup.js"></script>
-    <script src="assets/js/custom.js"></script>
 </body>
 </html>

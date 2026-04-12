@@ -6,6 +6,7 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neural_network import MLPClassifier
+from sklearn.ensemble import VotingClassifier
 from hmmlearn import hmm
 from sklearn.metrics import accuracy_score, classification_report
 
@@ -79,32 +80,30 @@ def main():
     print("HMM Accuracy:", accuracy_score(y_test, hmm_predictions))
     print(classification_report(y_test, hmm_predictions))
 
-    # Selecting the best model
-    best_model = None
-    best_model_name = ""
-    best_accuracy = max(svm_acc, dt_acc, ann_acc, hmm_acc)
+    # Hybrid Voting Classifier (Ensemble)
+    hybrid_model = VotingClassifier(estimators=[
+        ('svm', SVC(kernel='linear', probability=True)),
+        ('dt', DecisionTreeClassifier(criterion='entropy')),
+        ('ann', MLPClassifier(hidden_layer_sizes=(100,), max_iter=500, activation='relu', solver='adam'))
+    ], voting='soft')
+    
+    hybrid_model.fit(X_train, y_train)
+    hybrid_pred = hybrid_model.predict(X_test)
+    hybrid_acc = accuracy_score(y_test, hybrid_pred)
+    print("Hybrid Classifier Accuracy:", accuracy_score(y_test, hybrid_pred))
 
-    if best_accuracy == svm_acc:
-        best_model = svm_model
-        best_model_name = "SVM"
-    elif best_accuracy == dt_acc:
-        best_model = dt_model
-        best_model_name = "Decision Tree"
-    elif best_accuracy == ann_acc:
-        best_model = ann_model
-        best_model_name = "ANN"
-    elif best_accuracy == hmm_acc:
-        best_model = hmm_models
-        best_model_name = "HMM"
+    # Selecting the best individual model vs Hybrid
+    best_model_name = "Hybrid Ensemble Model"
+    best_accuracy = hybrid_acc
 
-    # Save the best model
-    joblib.dump(best_model, 'best_model.pkl')
+    # Save the True Hybrid model as best_model
+    joblib.dump(hybrid_model, 'best_model.pkl')
     joblib.dump(scaler, 'scaler.pkl')
 
-    print(f"Best Model: {best_model_name} with Accuracy: {best_accuracy}")
+    print(f"Final Model: {best_model_name} with Accuracy: {best_accuracy}")
 
     # Return all algorithm accuracies
-    return svm_acc, dt_acc, ann_acc,hmm_acc,best_model_name
+    return svm_acc, dt_acc, ann_acc, hmm_acc, hybrid_acc, best_model_name
     
 
 # Call the function and print accuracies
