@@ -7,12 +7,12 @@
     "icon": "./assets/images/icon.png",
     "scheme": "heartdiseaseapp",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "ios": {
       "supportsTablet": true
     },
     "android": {
-      "package": "com.anitha.heartriskai",
+      "package": "com.anitha.heartrisk.v1",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -44,6 +44,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "4e4e4b7a-7a85-4d2e-88db-088b4630e90e"
+      }
     }
   }
 }
