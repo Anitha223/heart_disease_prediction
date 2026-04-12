@@ -6,4 +6,4 @@
 // 5. Run Expo: npx expo start
 // DONE! No localtunnel needed. 100% error-free.
 
-export const API_BASE = 'http://10.137.160.236:8000';
+export const API_BASE = 'https://heart-disease-prediction-using-hybrid.onrender.com';
