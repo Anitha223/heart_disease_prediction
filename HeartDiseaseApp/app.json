@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "HeartDiseaseApp",
-    "slug": "HeartDiseaseApp",
+    "name": "heartdiseaseapp",
+    "slug": "heartdiseaseapp",
     "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
