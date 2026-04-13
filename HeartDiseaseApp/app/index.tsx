@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, SafeAreaView, StatusBar, ActivityIndicator, View } from 'react-native';
 import { WebView } from 'react-native-webview';
-import { API_BASE } from '../config';
+import { API_BASE } from './config';
 
 export default function App() {
   const [loading, setLoading] = React.useState(true);
