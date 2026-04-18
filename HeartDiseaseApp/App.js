@@ -3,7 +3,7 @@ import { StyleSheet, View, StatusBar, Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 export default function App() {
-  const RENDER_URL = "https://heart-disease-prediction-using-hybrid.onrender.com/";
+  const RENDER_URL = "https://heart-disease-ml-yx6d.onrender.com/";
 
   return (
     <View style={styles.container}>
