@@ -224,7 +224,7 @@ body {
     transform: translateY(-5px);
 }
 
-/* Mobile Menu Ultimate Fix - Always Visible */
+/* Mobile Menu Ultimate Fix - Clean Buttons */
 @media (max-width: 991px) {
     .navbar-toggler {
         display: none !important;
@@ -233,10 +233,9 @@ body {
         display: flex !important;
         flex-direction: column;
         width: 100%;
-        background: #0f172a;
-        border-radius: 12px;
-        margin-top: 15px;
-        padding: 10px 5px;
+        background: transparent !important;
+        margin-top: 20px;
+        padding: 0;
         height: auto !important;
         visibility: visible !important;
         opacity: 1 !important;
@@ -244,15 +243,16 @@ body {
     .nav-item {
         width: 100%;
         text-align: center;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .nav-item:last-child {
-        border-bottom: none;
+        margin-bottom: 10px;
     }
     .nav-link {
+        background: var(--primary) !important;
         color: white !important;
-        font-size: 16px !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
         padding: 12px !important;
         width: 100%;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2) !important;
     }
 }
