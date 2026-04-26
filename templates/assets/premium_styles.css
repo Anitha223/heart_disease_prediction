@@ -27,11 +27,7 @@ body {
 
 /* Glassmorphism Navigation */
 .header_section {
-    background: var(--glass) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: var(--shadow-md) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    background: transparent !important;
     padding: 10px 0 !important;
 }
 
@@ -48,10 +44,18 @@ body {
     font-weight: 800 !important;
     letter-spacing: -0.025em;
     font-size: 24px !important;
+    line-height: 1.4 !important;
+    padding-bottom: 5px !important;
 }
 
 .header_bottom {
-    background: transparent !important;
+    background: var(--glass) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-md) !important;
+    border-radius: 16px;
+    padding: 5px 15px;
+    margin: 0 10px;
 }
 
 .nav-link {
